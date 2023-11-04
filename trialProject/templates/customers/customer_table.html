@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Table</title>
+</head>
+
+{% extends 'home.html' %}
+{% block baseblock%}
+{% load static %}
+<body>
+
+  {% if table %}
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">First Name</th>
+          <th scope="col">Middle Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Age</th>
+          <th scope="col">Address</th>
+          <th scope="col">Image</th>
+        </tr>
+      </thead>
+      {% for cad in table %}
+        <tr style="color:green">
+          <td>{{cad.first_name}}</td>
+          <td>{{cad.middle_name}}</td>
+          <td>{{cad.last_name}}</td>
+          <td>{{cad.age}}</td>
+          <td>{{cad.address}}</td>
+          <td>{{cad.photo}}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+  <h1>NO DATA</h1>
+{% endif %}
+
+{%endblock%}
+</body>
+</html>
