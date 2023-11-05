@@ -7,4 +7,4 @@ class Customer(models.Model):
     last_name = models.CharField(verbose_name="Last Name", max_length=100, null=False)
     age = models.IntegerField(verbose_name="Age", null=False)
     address = models.TextField(verbose_name="Address", max_length=500, null=False)
-    photo = models.ImageField(verbose_name="Image", upload_to='images/')
+    photo = models.ImageField(max_length=255, blank=True, null=True)

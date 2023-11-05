@@ -6,3 +6,10 @@ class CustomerForms(forms.ModelForm):
     class Meta:
         model = Customer
         fields = "__all__"
+
+
+class CustomerFormsPhoto(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ['photo']
+

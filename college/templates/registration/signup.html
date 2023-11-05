@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>SignUp</title>
+  </head>
+{% extends 'home.html' %}
+  {% block baseblock %}
+
+  <body>
+    <div class="container" align="center" >
+      <h1>SignUp</h1>
+      <form method="POST">
+          {% csrf_token %}
+          {{form1.as_p}}
+          <input value="submit" type="submit">
+      </form>
+    </div>
+  </body>
+
+  {% endblock %}
+
+</html>
