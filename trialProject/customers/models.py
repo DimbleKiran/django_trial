@@ -8,3 +8,5 @@ class Customer(models.Model):
     age = models.IntegerField(verbose_name="Age", null=False)
     address = models.TextField(verbose_name="Address", max_length=500, null=False)
     photo = models.ImageField(max_length=255, blank=True, null=True)
+
+

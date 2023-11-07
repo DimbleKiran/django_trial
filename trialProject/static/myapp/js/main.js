@@ -1,5 +1,3 @@
-
-
 let videoStream;
 let isCameraActive = false;
 

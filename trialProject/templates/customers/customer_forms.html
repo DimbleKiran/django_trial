@@ -10,6 +10,15 @@
                 padding: 5px;
                 margin-bottom: 0px;
             }
+
+            #success-message {
+                background-color: #4caf50;
+                color: white;
+                padding: 1px;
+                border-radius: 20px;
+                margin-bottom: 10px;
+              }
+
         </style>
     </head>
 
@@ -17,40 +26,52 @@
     {% block baseblock%}
     {% load static %}
     <body>
+        <div id="success-message" align="center">
+
+            {% if show_success_message %}
+                Form submitted successfully!
+                <script>
+                  setTimeout(function() {
+                    var successMessage = document.getElementById('success-message');
+                    successMessage.style.display = 'none';
+                  }, 3000); // 3 seconds
+                </script>
+            {% endif %}
+
+            {% if messages %}
+                {% for message in messages %}
+                  {{ message }}
+                {% endfor %}
+            {% endif %}
+
+        </div>
 
         <h1 class="text-center">Customer Form</h1>
-
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6">
-                        <form method="POST" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{cust_user.as_p}}
-                            <td><a class="btn btn-warning" href="/customers/feed/" role="button">Camera</a></td>
-                            <br>
-                            <br>
-                            <button type="submit" class="btn btn-success">Submit</button>
-                        </form>
 
-                    </div>
-
-
-
-                    <!--
-                    <div class="col-md-6">
+                    <div class="col-md-6" align="left">
                         <button id="startButton" class="btn btn-primary mb-3">Start Camera</button>
+                        <a class="btn btn-warning mb-3" href="/customers/feed/" role="button">Python Camera</a>
                             <div class="camera-container">
                                 <video id="videoElement" autoplay class="w-100"></video>
                             </div>
-                    </div>-->
+                    </div>
+
+                    <div class="col-md-6" align="right">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{cust_user.as_p}}
+                                </div>
+                            <button type="submit" class="btn btn-success btn-block">Submit</button>
+                        </form>
                 </div>
             </div>
-
 
             <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-            <!-- <script src="{% static 'myapp/js/main.js' %}"></script> -->
+            <script src="{% static 'myapp/js/main.js' %}"></script>
         {%endblock%}
     </body>
 </html>
