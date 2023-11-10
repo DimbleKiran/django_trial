@@ -23,4 +23,7 @@ urlpatterns = [
     path('customertables/', views.customer_views_table),
     path('feed/', views.video_feed, name='video_feed'),
     path('delete/<id>/', views.delete),
+    path('customerdetails/', views.customer_details_view_form),
+    path('customerdetailstables/', views.customer_details_table),
+
 ]

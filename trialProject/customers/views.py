@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .forms import CustomerForms
-from .models import Customer
+from .forms import CustomerForms, CustomerDetailsForms
+from .models import Customer, CustomerDetails
 import cv2
 from django.http import HttpResponse, HttpResponseRedirect
 import os
@@ -14,7 +14,6 @@ def customer_views_forms(r):
     cust_user = CustomerForms
     if r.method == "POST":
         forms = CustomerForms(r.POST, r.FILES)
-        print(r.FILES)
         if forms.is_valid():
             forms.save()
             r.session['show_success_message'] = True
@@ -30,6 +29,30 @@ def customer_views_forms(r):
 def customer_views_table(r):
     table = Customer.objects.all()
     return render(r, 'customers/customer_table.html', {"table": table})
+
+
+def delete(r, id):
+    obj = Customer.objects.get(id=id)
+    if obj.photo:
+        if os.path.exists(obj.photo.path):
+            os.remove(obj.photo.path)
+    obj.delete()
+    return HttpResponseRedirect('/customers/customertables/')
+
+
+def customer_details_view_form(r):
+    cust_details = CustomerDetailsForms
+    if r.method == "POST":
+        cus_det_forms = CustomerDetailsForms(r.POST)
+        if cus_det_forms.is_valid():
+            cus_det_forms.save()
+            print('Saved')
+    return render(r, "customers/customer_details_forms.html", {"cust_details": cust_details})
+
+
+def customer_details_table(r):
+    table1 = CustomerDetails.objects.all()
+    return render(r, "customers/customer_details_table.html", {"table1": table1})
 
 
 def video_feed(r):
@@ -72,27 +95,5 @@ def video_feed(r):
     return HttpResponse(f"Image : {image_path}")
 
 
-def delete(r, id):
-    obj = Customer.objects.get(id=id)
-    if obj.photo:
-        if os.path.exists(obj.photo.path):
-            os.remove(obj.photo.path)
-    obj.delete()
-    return HttpResponseRedirect('/customers/customertables/')
 
 
-# def video_feed(request):
-#     cap = cv2.VideoCapture(0)
-#
-#     def generate():
-#         while True:
-#             ret, frame = cap.read()
-#             if not ret:
-#                 break
-#
-#             _, jpeg = cv2.imencode('.jpg', frame)
-#             yield (b'--frame\r\n'
-#                    b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n\r\n')
-#
-#         cap.release()
-#     return StreamingHttpResponse(generate(), content_type='multipart/x-mixed-replace; boundary=frame')

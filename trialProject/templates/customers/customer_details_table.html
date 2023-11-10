@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Customer Details</title>
+  </head>
+  {% extends 'home.html' %}
+  {% block baseblock%}
+
+  <body>
+
+    {% if table1 %}
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Project</th>
+            <th scope="col">Name</th>
+            <th scope="col"> </th>
+          </tr>
+        </thead>
+          {% for cad in table1 %}
+            <tr style="color:green">
+              <td>{{cad.customer}}</td>
+              <td>{{cad.cust_name}}</td>
+              <!--<td><a class="btn btn-danger" href="/customers/delete/{{cad.id}}" role="button">&#128465;Delete</a></td>-->
+               <!-- comment -->
+            </tr>
+          {% endfor %}
+      </table>
+
+    {% else %}
+    <h1>NO DATA</h1>
+
+  {% endif %}
+
+  </body>
+  {%endblock%}
+</html>

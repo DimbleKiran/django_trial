@@ -20,6 +20,7 @@
             <th scope="col">Age</th>
             <th scope="col">Address</th>
             <th scope="col">Image</th>
+            <th scope="col">Project Code</th>
             <th scope="col"> </th>
           </tr>
         </thead>
@@ -36,6 +37,7 @@
                     <img src={{cad.photo.url}} style="width: 50px; height: 50px;">
                   {% endif %}
               </td>
+              <td>{{cad.project}}</td>
               <td>
                 {% if cad.photo %}
                   <a class="btn btn-danger" href="/customers/delete/{{ cad.id }}/{{ cad.photo }}/" role="button">&#128465; Delete</a>
@@ -43,7 +45,6 @@
                   <a class="btn btn-danger" href="/customers/delete/{{ cad.id }}/" role="button">&#128465; Delete</a>
                 {% endif %}
               </td>
-
               <!--<td><a class="btn btn-danger" href="/customers/delete/{{cad.id}}" role="button">&#128465;Delete</a></td>-->
                <!-- comment -->
             </tr>
